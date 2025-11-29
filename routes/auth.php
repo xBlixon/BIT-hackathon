@@ -8,11 +8,12 @@ use Inertia\Inertia;
 Route::middleware('guest')->group(function () {
 
     // the registration page
-    Route::get('register', [LoginController::class, 'create'])
-        ->name('register');
+    Route::get('register', function () {
+        return Inertia::render('auth/Register');
+    })->name('register');
 
     // save user data to data base
-    Route::post('register', [LoginController::class, 'store']);
+    Route::post('register', [LoginController::class, 'register']);
 
     // the login page
     Route::get('login', [LoginController::class, 'login'])

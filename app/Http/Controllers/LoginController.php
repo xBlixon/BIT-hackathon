@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -37,12 +37,12 @@ class LoginController extends Controller
             'username' => 'The provided credentials do not match our records.',
         ])->onlyInput('username');
     }
-    
-    public function register(Request $request) : RedirectResponse
+
+    public function register(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:8'], 
+            'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
         $user = User::create([
@@ -51,7 +51,8 @@ class LoginController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect()->route('dashboard');
+
+        return redirect()->route('home');
     }
 
     public function logout(): RedirectResponse
