@@ -2,21 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use Database\Factories\EventFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class EventSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            TagSeeder::class,
-            EventSeeder::class,
-        ]);
+        EventFactory::new()->count(5)->create();
     }
 }
