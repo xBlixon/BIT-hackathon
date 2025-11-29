@@ -19,7 +19,7 @@ Route::get('/profile', function () {
 })->middleware(['auth'])->name('profile');
 
 Route::get('home', function () {
-    return Inertia::render('Landing',
+    return Inertia::render('Home',
         [
             'isLoggedIn' => Auth::check(),
         ]);
