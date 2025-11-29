@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
-})->name('home');
+})->name('root');
 
 Route::get('/landing', function (){
     return Inertia::render('Landing');
@@ -24,20 +24,20 @@ Route::get('dashboard', function () {
 // homepage (shows list of events)
 Route::get('/', [EventController::class, 'index'])->name('home');
 
-//view event details 
+//view event details
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 
 //only for users
 Route::middleware('auth')->group(function () {
-    
+
     //the main page
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    
+
     //create an event
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-    
+
     //save event
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
 

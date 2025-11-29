@@ -1,30 +1,37 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
 
-    //the registration page
-    Route::get('register', [RegisteredUserController::class, 'create'])
+    // the registration page
+    Route::get('register', [LoginController::class, 'create'])
         ->name('register');
 
-    //save user data to data base
-    Route::post('register', [RegisteredUserController::class, 'store']);
-    
-    //the login page
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    // save user data to data base
+    Route::post('register', [LoginController::class, 'store']);
+
+    // the login page
+    Route::get('login', [LoginController::class, 'login'])
         ->name('login');
-    
-    //login submission (check passowrd and start session)
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);    
+
+    // login submission (check passowrd and start session)
+    Route::post('login', [LoginController::class, 'authenticate']);
 
 });
 
-
-Route::middleware('auth')->group(function(){
-    //logout and ridirect to home page
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::middleware('auth')->group(function () {
+    // logout and ridirect to home page
+    Route::match(['get', 'post'], 'logout', [LoginController::class, 'logout'])
         ->name('logout');
 });
+
+Route::get('home', function () {
+    return Inertia::render('Landing',
+        [
+            'isLoggedIn' => Auth::check(),
+        ]);
+})->name('home');
