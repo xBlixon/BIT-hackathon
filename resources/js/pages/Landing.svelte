@@ -14,11 +14,12 @@
     <Button href={route('register')}>register</Button>
     <Button href={route('login')}>login</Button>
     {:else}
+    <a href={route('profile') }>
         <Avatar.Root class="h-[3vw] w-[3vw] min-h-12 min-w-12">
             <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />   
-            <Avatar.Fallback>CN</Avatar.Fallback>
-            <!-- <Link href={route('profile')}></Link> -->
+            <Avatar.Fallback>prof</Avatar.Fallback>
         </Avatar.Root>
+    </a>
     {/if}
     </div>
 

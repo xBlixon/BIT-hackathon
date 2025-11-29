@@ -14,9 +14,9 @@ Route::get('/landing', function (){
     return Inertia::render('Landing');
 });
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile', function () {
+    return Inertia::render('Profile');
+})->middleware(['auth', 'verified'])->name('profile');
 
 
 /* WHEN THE DATA BASE EXISTS:
