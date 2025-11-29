@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -33,7 +35,23 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'username' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        ])->onlyInput('username');
+    }
+    
+    public function register(Request $request) : RedirectResponse
+    {
+        $validated = $request->validate([
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8'], 
+        ]);
+
+        $user = User::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+        return redirect()->route('dashboard');
     }
 
     public function logout(): RedirectResponse
