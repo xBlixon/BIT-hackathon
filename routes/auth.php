@@ -30,9 +30,4 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
-Route::get('home', function () {
-    return Inertia::render('Landing',
-        [
-            'isLoggedIn' => Auth::check(),
-        ]);
-})->name('home');
+

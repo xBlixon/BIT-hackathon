@@ -16,8 +16,14 @@ Route::get('/landing', function (){
 
 Route::get('/profile', function () {
     return Inertia::render('Profile');
-})->middleware(['auth', 'verified'])->name('profile');
+})->middleware(['auth'])->name('profile');
 
+Route::get('home', function () {
+    return Inertia::render('Landing',
+        [
+            'isLoggedIn' => Auth::check(),
+        ]);
+})->name('home');
 
 /* WHEN THE DATA BASE EXISTS:
 //for all guests
