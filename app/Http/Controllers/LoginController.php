@@ -10,7 +10,6 @@ use Inertia\Response;
 
 class LoginController extends Controller
 {
-
     public function login(): Response
     {
         return Inertia::render('auth/Login');
@@ -35,5 +34,12 @@ class LoginController extends Controller
         return back()->withErrors([
             'username' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+
+        return redirect()->route('home');
     }
 }

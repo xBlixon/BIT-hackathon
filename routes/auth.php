@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::middleware('guest')->group(function () {
 
@@ -23,6 +25,13 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // logout and ridirect to home page
-    Route::post('logout', [LoginController::class, 'destroy'])
+    Route::match(['get', 'post'], 'logout', [LoginController::class, 'logout'])
         ->name('logout');
 });
+
+Route::get('home', function () {
+    return Inertia::render('Landing',
+        [
+            'isLoggedIn' => Auth::check(),
+        ]);
+})->name('home');
