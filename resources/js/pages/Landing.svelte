@@ -14,7 +14,7 @@
     <Button href={route('register')}>register</Button>
     <Button href={route('login')}>login</Button>
     {:else}
-        <Avatar.Root>
+        <Avatar.Root class="h-[3vw] w-[3vw] min-h-12 min-w-12">
             <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />   
             <Avatar.Fallback>CN</Avatar.Fallback>
             <!-- <Link href={route('profile')}></Link> -->
