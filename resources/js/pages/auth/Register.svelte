@@ -1,6 +1,5 @@
 <script lang="ts">
     import InputError from '@/components/InputError.svelte';
-    import TextLink from '@/components/TextLink.svelte';
     import { Button } from '@/components/ui/button';
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
@@ -18,15 +17,9 @@
         {#snippet children({ errors, processing }: { errors: Record<string, string>; processing: boolean })}
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="name">Name</Label>
-                    <Input id="name" name="name" type="text" required autofocus tabindex={1} autocomplete="name" placeholder="Full name" />
-                    <InputError message={errors.name} />
-                </div>
-
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input id="email" name="email" type="email" required tabindex={2} autocomplete="email" placeholder="email@example.com" />
-                    <InputError message={errors.email} />
+                    <Label for="name">Username</Label>
+                    <Input id="username" name="username" type="text" required autofocus tabindex={1} autocomplete="username" placeholder="username" />
+                    <InputError message={errors.username} />
                 </div>
 
                 <div class="grid gap-2">
@@ -59,7 +52,7 @@
 
             <div class="text-center text-sm text-muted-foreground">
                 Already have an account?
-                <TextLink href={route('login')} class="underline underline-offset-4" tabindex={6}>Log in</TextLink>
+                <a href={route('login')} class="underline underline-offset-4" tabindex={6}>Log in</a>
             </div>
         {/snippet}
     </Form>
