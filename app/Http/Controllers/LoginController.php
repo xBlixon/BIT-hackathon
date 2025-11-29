@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class LoginController extends Controller
 {
+
+    public function login(): Response
+    {
+        return Inertia::render('auth/Login');
+    }
+
     /**
      * Handle an authentication attempt.
      */
@@ -21,7 +29,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended();
+            return redirect()->route('home');
         }
 
         return back()->withErrors([
