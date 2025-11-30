@@ -16,8 +16,6 @@ class HomeController extends Controller
      * page - number of the page of events
      * tags[#] - tag to be filtered by
      * search - title text to filter by
-     * @param Request $request
-     * @return Response
      */
     public function home(Request $request): Response
     {
@@ -45,6 +43,7 @@ class HomeController extends Controller
             'isLoggedIn' => Auth::check(),
             'allTags' => Tag::all(),
             'filteredTags' => $filteredTagNames,
+            'user' => auth()->user(),
         ]);
     }
 }
