@@ -4,14 +4,14 @@
     import * as Avatar from "@/components/ui/avatar";
     import ActivityCard from "@/components/ActivityCard.svelte";
 
-    let { events,isLoggedIn, allTags ,filteredTags =[]} = $props();
+    let { user,events,isLoggedIn, allTags ,filteredTags =[]} = $props();
 </script>
 <header class="flex w-full items-center justify-between p-4 border-b min-h-18">
     <div>
         <SearchBar allTags={allTags}/>
     </div>
     <div class="gap-4 flex relative top right z-10">
-        <Button  variant="secondary" size="icon" class="my-auto size-7">+</Button>
+        <Button href={route('event.create')} variant="secondary" size="icon" class="my-auto size-7">+</Button>
     {#if !isLoggedIn}
     <Button href={route('register')}>register</Button>
     <Button href={route('login')}>login</Button>
@@ -29,7 +29,7 @@
 <main>
     <div class="flex flex-wrap">
         {#each events as event}
-        <ActivityCard class="mr-auto"  {...event}}></ActivityCard>
+        <ActivityCard class="mr-auto" user={user} {...event}}></ActivityCard>
 {/each}
     </div>
     {#each filteredTags as tag}

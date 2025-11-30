@@ -22,7 +22,7 @@ Route::get('/profile', function () {
 Route::middleware('auth')->group(function () {
 
     // create event
-    Route::get('/event/create', [EventController::class, 'create'])
+    Route::get('create', [EventController::class, 'create'])
         ->name('event.create');
 
     // save event

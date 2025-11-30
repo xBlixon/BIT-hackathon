@@ -28,7 +28,7 @@ class EventController extends Controller
         // get all tags
         $tags = Tag::all();
 
-        return Inertia::render('Events/Create', [
+        return Inertia::render('AddEvent', [
             'tags' => $tags,
         ]);
     }

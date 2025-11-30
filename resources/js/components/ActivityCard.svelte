@@ -8,8 +8,12 @@
         title = "Default Title", 
         description = "Default description...", 
         people = "0/10", 
-        tags = []
+        tags = [],
+        attendees = [],
+        user = {}
     } = $props(); 
+    
+   let isAttending = attendees.some(attendee => attendee.id === user.id);
 </script>
 
 <Dialog.Root>
@@ -29,12 +33,16 @@
 
                 <Card.Footer class="flex justify-between items-center">
                     
+                    {#if {isAttending}}
+                    <Button class="bg-gray-600 text-white h-8">Joined</Button>
+                    {:else}
                     <Button 
                         class="bg-green-600 hover:bg-green-700 text-white h-8" 
                         onclick={(e) => { e.stopPropagation(); console.log('Joined!'); }}
                     >
                         Join
                     </Button>
+                    {/if}
                     
                     <p class="text-sm text-gray-500">{people}</p>
                 </Card.Footer>
