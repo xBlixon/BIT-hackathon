@@ -1,49 +1,51 @@
 <script>
     import * as Card from "@/components/ui/card/";
-    import { Button } from "@/components/ui/button";   
+    import { Button } from "@/components/ui/button";
     import * as Dialog from "@/components/ui/dialog";
-    import { Badge } from "@/components/ui/badge"; 
+    import { Badge } from "@/components/ui/badge";
 
-    let { 
-        title = "Default Title", 
-        description = "Default description...", 
-        people = "0/10", 
+    let {
+        title = "Default Title",
+        description = "Default description...",
+        people = "0/10",
         tags = [],
         attendees = [],
-        user = {}
-    } = $props(); 
-    
+        user = {},
+        id
+    } = $props();
+
    let isAttending = attendees.some(attendee => attendee.id === user.id);
 </script>
 
 <Dialog.Root>
     <Dialog.Trigger>
         {#snippet child({ props })}
-            <Card.Root 
-                {...props} 
+            <Card.Root
+                {...props}
                 class="min-w-[200px] max-w-[240px] m-3 h-80 flex flex-col text-left hover:bg-slate-900 transition-colors cursor-pointer"
             >
                 <Card.Header>
                     <Card.Title class="text-lg">{title}</Card.Title>
                 </Card.Header>
-                
+
                 <Card.Content class="flex-1">
                     <p class="text-sm text-gray-600 line-clamp-4">{description}</p>
                 </Card.Content>
 
                 <Card.Footer class="flex justify-between items-center">
-                    
+
                     {#if {isAttending}}
                     <Button class="bg-gray-600 text-white h-8">Joined</Button>
                     {:else}
-                    <Button 
-                        class="bg-green-600 hover:bg-green-700 text-white h-8" 
-                        onclick={(e) => { e.stopPropagation(); console.log('Joined!'); }}
+                    <Button
+                        class="bg-green-600 hover:bg-green-700 text-white h-8"
+                        onclick={(e) => { e.stopPropagation();  }}
+                        href="/join/{id}"
                     >
                         Join
                     </Button>
                     {/if}
-                    
+
                     <p class="text-sm text-gray-500">{people}</p>
                 </Card.Footer>
             </Card.Root>
@@ -62,7 +64,7 @@
                     {description}
                 </p>
             </div>
-            
+
             <div class="space-y-2">
                  <h4 class="font-medium leading-none">Tags</h4>
                  <Badge variant="outline">Sport</Badge>
@@ -70,7 +72,9 @@
         </div>
 
         <Dialog.Footer>
-            <Button class="absolute right-5 bottom-5 bg-green-600 hover:bg-green-700 text-white">
+            <Button class="absolute right-5 bottom-5 bg-green-600 hover:bg-green-700 text-white"
+                href="/join/{id}"
+            >
                 Join
             </Button>
         </Dialog.Footer>
