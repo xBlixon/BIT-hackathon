@@ -39,7 +39,6 @@ class HomeController extends Controller
             ->whereLike('title', $textSearch)
             ->paginate(15)
             ->all();
-        dd($events);
 
         return Inertia::render('Home', [
             'events' => $events,
