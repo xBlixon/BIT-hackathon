@@ -14,7 +14,6 @@
         title: '',
         description: '',
         location: '',
-        max_people: 10,
         tags: [] as number[],
     });
     function submit() {
@@ -79,7 +78,7 @@
             <Card.Footer class="flex justify-between">
                 <Button variant="ghost" href={route('home')}>Cancel</Button>
 
-                <Button type="submit">
+                <Button type="submit"   >
                     {#if $form.processing}
                         <LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
                     {/if}

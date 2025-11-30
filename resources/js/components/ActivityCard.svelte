@@ -12,7 +12,7 @@
         attendees = [],
         user = {}
     } = $props(); 
-    
+    let numberOfPeople = attendees.length;    
    let isAttending = attendees.some(attendee => attendee.id === user.id);
 </script>
 
@@ -21,7 +21,7 @@
         {#snippet child({ props })}
             <Card.Root 
                 {...props} 
-                class="min-w-[200px] max-w-[240px] m-3 h-80 flex flex-col text-left hover:bg-slate-900 transition-colors cursor-pointer"
+                class="w-[240px] m-3 h-80 flex flex-col text-left hover:bg-slate-900 transition-colors cursor-pointer"
             >
                 <Card.Header>
                     <Card.Title class="text-lg">{title}</Card.Title>
@@ -44,7 +44,7 @@
                     </Button>
                     {/if}
                     
-                    <p class="text-sm text-gray-500">{people}</p>
+                    <p class="text-sm text-gray-500">Attending: {numberOfPeople}</p>
                 </Card.Footer>
             </Card.Root>
         {/snippet}
