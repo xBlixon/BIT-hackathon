@@ -22,8 +22,10 @@
    <DropdownMenu.Label>Tags:</DropdownMenu.Label>
    <DropdownMenu.Separator />
    {#each allTags as tag,i}
-   
-   <DropdownMenu.CheckboxItem bind:checked={checkedTags[i]}>
+   <DropdownMenu.CheckboxItem bind:checked={checkedTags[i]}
+   onSelect={(e) => {
+                e.preventDefault();
+            checkedTags[i] = !checkedTags[i];}}>
     {tag.name}
 </DropdownMenu.CheckboxItem>
 {/each}
