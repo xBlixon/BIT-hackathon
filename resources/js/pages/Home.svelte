@@ -1,6 +1,5 @@
 <script>
     import { Button } from "@/components/ui/button";
-
     import * as Avatar from "@/components/ui/avatar";
     import { Link } from "lucide-svelte";
     import ActivityCard from "@/ActivityCard.svelte";
