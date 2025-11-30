@@ -32,12 +32,12 @@ class HomeController extends Controller
 
         $events = $eventsQuery
             ->with('tags')
-            ->withCount('attendees')
+            ->with('user')
+            ->with('attendees')
             ->latest()
             ->whereLike('title', $textSearch)
             ->paginate(15)
-            ->all();
-
+        ->all();
         return Inertia::render('Home', [
             'events' => $events,
             'isLoggedIn' => Auth::check(),

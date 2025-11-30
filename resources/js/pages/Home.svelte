@@ -29,7 +29,8 @@
 <main>
     <div class="flex flex-wrap">
         {#each events as event}
-        <ActivityCard class="mr-auto" user={user} {...event}}></ActivityCard>
+            {console.dir(event)}
+        <ActivityCard class="mr-auto" user={user} {...event} attendees={event.attendees}></ActivityCard>
 {/each}
     </div>
     {#each filteredTags as tag}
