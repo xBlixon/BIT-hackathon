@@ -1,9 +1,9 @@
 <script>
     import { Button } from "@/components/ui/button";
     import * as Avatar from "@/components/ui/avatar";
-    import ActivityCard from "@/ActivityCard.svelte";
+    import ActivityCard from "@/components/ActivityCard.svelte";
 
-    let { isLoggedIn, filteredTags } = $props();
+    let { isLoggedIn, filteredTags =[]} = $props();
 </script>
 <header class="flex w-full items-center justify-between p-4 border-b min-h-18">
     <div class="absolute top-4 right-4 z-10">
