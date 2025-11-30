@@ -15,9 +15,8 @@ Route::get('/landing', function () {
     return Inertia::render('Landing');
 });
 
-Route::get('/profile', function () {
-    return Inertia::render('Profile');
-})->middleware(['auth'])->name('profile');
+Route::get('/profile', [ProfileController::class, 'profile'])
+    ->middleware(['auth'])->name('profile');
 
 Route::middleware('auth')->group(function () {
 
