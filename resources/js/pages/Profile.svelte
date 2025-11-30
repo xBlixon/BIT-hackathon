@@ -4,5 +4,6 @@
 
 <div>
     <p>This is profile page</p>
-    <Button href={route('register')}>Home</Button>
+    <Button href={route('home')}>Home</Button>
+    <Button href={route('logout')}>Logout</Button>
 </div>

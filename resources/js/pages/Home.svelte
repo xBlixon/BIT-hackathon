@@ -1,12 +1,16 @@
 <script>
     import { Button } from "@/components/ui/button";
+    import SearchBar from "@/components/SearchBar.svelte"
     import * as Avatar from "@/components/ui/avatar";
     import ActivityCard from "@/components/ActivityCard.svelte";
 
-    let { isLoggedIn, filteredTags =[]} = $props();
+    let { isLoggedIn, allTags ,filteredTags =[]} = $props();
 </script>
 <header class="flex w-full items-center justify-between p-4 border-b min-h-18">
-    <div class="absolute top-4 right-4 z-10">
+    <div>
+        <SearchBar allTags={allTags}/>
+    </div>
+    <div class="relative top right z-10">
 
     {#if !isLoggedIn}
     <Button href={route('register')}>register</Button>
@@ -23,7 +27,6 @@
 
 </header>
 <main>
-    <p>tu bedzie search bar</p>
     <div class="flex">
         <ActivityCard/>
         <ActivityCard/>
