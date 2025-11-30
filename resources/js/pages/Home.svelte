@@ -1,9 +1,9 @@
 <script>
     import { Button } from "@/components/ui/button";
 
-    // 1. FIXED IMPORT: Usually you import from the folder, not the specific .svelte file
     import * as Avatar from "@/components/ui/avatar";
     import { Link } from "lucide-svelte";
+    import ActivityCard from "@/ActivityCard.svelte";
 
     let { isLoggedIn, filteredTags } = $props();
 </script>
@@ -25,6 +25,16 @@
 
 </header>
 <main>
+    <p>tu bedzie search bar</p>
+    <div class="flex">
+        <ActivityCard/>
+        <ActivityCard/>
+        <ActivityCard/>
+
+    </div>
+    <div class="absolute bottom-4 right-4">
+<Button  variant="secondary" size="icon" class="size-12">+</Button>
+    </div>
     <p> this is the initial landing page Hello :P</p>
     <p>{isLoggedIn ? "EZ" : ":("}</p>
     {#each filteredTags as tag}
