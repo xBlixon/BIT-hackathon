@@ -1,22 +1,39 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventJoiningController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('root');
 
-Route::get('/landing', function (){
+Route::get('/landing', function () {
     return Inertia::render('Landing');
 });
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile', [ProfileController::class, 'profile'])
+    ->middleware(['auth'])->name('profile');
+
+Route::middleware('auth')->group(function () {
+
+    // create event
+    Route::get('create', [EventController::class, 'create'])
+        ->name('event.create');
+
+    // save event
+    Route::post('/event', [EventController::class, 'store'])
+        ->name('event.store');
+
+    Route::get('/join/{event}', [EventJoiningController::class, 'join'])
+        ->name('event.join');
+});
+
+Route::get('home', [HomeController::class, 'home'])
+    ->name('home');
 
 
 /* WHEN THE DATA BASE EXISTS:
