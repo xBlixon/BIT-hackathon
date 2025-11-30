@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,7 +39,7 @@ class Event extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public static function fetchByTags(Collection $tags): \Illuminate\Database\Eloquent\Builder
+    public static function fetchByTags(Collection $tags): Builder
     {
         return self::whereHas('tags', function ($query) use ($tags) {
             $query->whereIn('tags.id', $tags->pluck('id'));
