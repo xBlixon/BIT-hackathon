@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use Database\Factories\EventFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,8 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        EventFactory::new()->count(5)->create();
+        EventFactory::new()
+            ->count(5)
+            ->create();
     }
 }
