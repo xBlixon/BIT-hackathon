@@ -22,15 +22,15 @@ Route::get('/profile', function () {
 Route::middleware('auth')->group(function () {
 
     // create event
-    Route::get('/events/create', [EventController::class, 'create'])
-        ->name('events.create');
+    Route::get('/event/create', [EventController::class, 'create'])
+        ->name('event.create');
 
     // save event
-    Route::post('/events', [EventController::class, 'store'])
-        ->name('events.store');
+    Route::post('/event', [EventController::class, 'store'])
+        ->name('event.store');
 
     Route::get('/join/{event}', [EventJoiningController::class, 'join'])
-        ->name('events.join');
+        ->name('event.join');
 });
 
 Route::get('home', [HomeController::class, 'home'])
