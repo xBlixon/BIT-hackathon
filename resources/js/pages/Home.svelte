@@ -1,11 +1,11 @@
 <script>
     import { Button } from "@/components/ui/button";
-
-    // 1. FIXED IMPORT: Usually you import from the folder, not the specific .svelte file
-    import * as Avatar from "@/components/ui/avatar";
+    
+    import * as Avatar from "@/components/ui/avatar"; 
     import { Link } from "lucide-svelte";
+    import ActivityCard from "@/ActivityCard.svelte";
 
-    let { isLoggedIn, tags } = $props();
+    let { isLoggedIn } = $props();
 </script>
 <header class="flex w-full items-center justify-between p-4 border-b min-h-18">
     <div class="absolute top-4 right-4 z-10">
@@ -16,7 +16,7 @@
     {:else}
     <a href={route('profile') }>
         <Avatar.Root class="h-[3vw] w-[3vw] min-h-12 min-w-12">
-            <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+            <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />   
             <Avatar.Fallback>prof</Avatar.Fallback>
         </Avatar.Root>
     </a>
@@ -25,7 +25,14 @@
 
 </header>
 <main>
-    <p> this is the initial landing page Hello :P</p>
-    <p>{isLoggedIn ? "EZ" : ":("}</p>
-    <p>{tags}</p>
+    <p>tu bedzie search bar</p>
+    <div class="flex">
+        <ActivityCard/>
+        <ActivityCard/>
+        <ActivityCard/>
+        
+    </div>
+    <div class="absolute bottom-4 right-4">
+<Button  variant="secondary" size="icon" class="size-12">+</Button>
+    </div>
 </main>
