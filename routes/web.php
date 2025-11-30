@@ -18,12 +18,14 @@ Route::get('/profile', function () {
     return Inertia::render('Profile');
 })->middleware(['auth'])->name('profile');
 
-Route::get('home', function () {
-    return Inertia::render('Home',
-        [
-            'isLoggedIn' => Auth::check(),
-        ]);
-})->name('home');
+Route::middleware('auth')->group(function () {
+    
+    //create event
+    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+    
+    //save event
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+});
 
 /* WHEN THE DATA BASE EXISTS:
 //for all guests
