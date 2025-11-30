@@ -1,23 +1,33 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('root');
 
-Route::get('/landing', function (){
+Route::get('/landing', function () {
     return Inertia::render('Landing');
 });
 
 Route::get('/profile', function () {
     return Inertia::render('Profile');
 })->middleware(['auth'])->name('profile');
+
+Route::middleware('auth')->group(function () {
+
+    // create event
+    Route::get('/events/create', [EventController::class, 'create'])
+        ->name('events.create');
+
+    // save event
+    Route::post('/events', [EventController::class, 'store'])
+        ->name('events.store');
+});
 
 Route::get('home', [HomeController::class, 'home'])
     ->name('home');
