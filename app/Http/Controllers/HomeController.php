@@ -21,7 +21,7 @@ class HomeController extends Controller
         } else {
             $events = Event::all();
         }
-        dd($events);
+        //dd($events);
         return Inertia::render('Home',
             [
                 'isLoggedIn' => Auth::check(),

@@ -2,6 +2,7 @@
     import * as Card from "@/components/ui/card/"
     import { Button } from "@/components/ui/button";   
     import * as Dialog from "@/components/ui/dialog"
+    import { stopPropagation } from "svelte/legacy";
 
     let title = "tytul";
     let description = "lorem ipsum doltor sit ament"
@@ -20,7 +21,8 @@
           <p>{description}</p>
         </Card.Content>
         <Card.Footer class="justify-between">
-        <Button class="bg-green-600 hover:bg-green-700 text-white ">
+        <Button class="bg-green-600 hover:bg-green-700 text-white " onclick={(e) => { 
+        e.stopPropagation();}}>
           Join
         </Button>
         <p>{people}</p>
