@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
@@ -18,12 +19,8 @@ Route::get('/profile', function () {
     return Inertia::render('Profile');
 })->middleware(['auth'])->name('profile');
 
-Route::get('home', function () {
-    return Inertia::render('Home',
-        [
-            'isLoggedIn' => Auth::check(),
-        ]);
-})->name('home');
+Route::get('home', [HomeController::class, 'home'])
+    ->name('home');
 
 /* WHEN THE DATA BASE EXISTS:
 //for all guests
