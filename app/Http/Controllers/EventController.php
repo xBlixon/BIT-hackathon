@@ -40,7 +40,6 @@ class EventController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
             'location' => 'required|string',
             'tags' => 'array',
         ]);
@@ -49,7 +48,7 @@ class EventController extends Controller
         $event = $request->user()->events()->create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'date' => $validated['date'],
+            'date' => now(),
             'location' => $validated['location'],
         ]);
 
@@ -57,6 +56,9 @@ class EventController extends Controller
         if (!empty($validated['tags'])) {
             $event->tags()->attach($validated['tags']);
         }
+
+        // creator is an attendee
+        $event->attendees()->attach(auth()->id());
 
         // go back home
         return redirect()->route('home');
