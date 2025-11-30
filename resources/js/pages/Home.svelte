@@ -5,7 +5,7 @@
     import * as Avatar from "@/components/ui/avatar";
     import { Link } from "lucide-svelte";
 
-    let { isLoggedIn, tags } = $props();
+    let { isLoggedIn, filteredTags } = $props();
 </script>
 <header class="flex w-full items-center justify-between p-4 border-b min-h-18">
     <div class="absolute top-4 right-4 z-10">
@@ -27,5 +27,7 @@
 <main>
     <p> this is the initial landing page Hello :P</p>
     <p>{isLoggedIn ? "EZ" : ":("}</p>
-    <p>{tags}</p>
+    {#each filteredTags as tag}
+        <p>{tag.name}</p>
+    {/each}
 </main>

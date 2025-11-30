@@ -9,56 +9,56 @@ use Inertia\Inertia;
 
 class EventController extends Controller
 {
-    //loading events
+    // loading events
     public function index()
     {
         $events = Event::with('tags')
-            ->withCount('attendees') 
+            ->withCount('attendees')
             ->latest()
             ->get();
 
         return Inertia::render('Welcome', [
-            'events' => $events
+            'events' => $events,
         ]);
     }
 
-    //showing the form for creating an event
+    // showing the form for creating an event
     public function create()
     {
-        //get all tags
+        // get all tags
         $tags = Tag::all();
 
         return Inertia::render('Events/Create', [
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 
-    //saving data to database
+    // saving data to database
     public function store(Request $request)
     {
-        //checking user input
+        // checking user input
         $validated = $request->validate([
-            'title'       => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date'        => 'required|date',
-            'location'    => 'required|string',
-            'tags'        => 'array', 
+            'date' => 'required|date',
+            'location' => 'required|string',
+            'tags' => 'array',
         ]);
 
-        //create event
+        // create event
         $event = $request->user()->events()->create([
-            'title'       => $validated['title'],
+            'title' => $validated['title'],
             'description' => $validated['description'],
-            'date'        => $validated['date'],
-            'location'    => $validated['location'],
+            'date' => $validated['date'],
+            'location' => $validated['location'],
         ]);
 
-        //add tags
+        // add tags
         if (!empty($validated['tags'])) {
             $event->tags()->attach($validated['tags']);
         }
 
-        //go back home
+        // go back home
         return redirect()->route('home');
     }
 }
