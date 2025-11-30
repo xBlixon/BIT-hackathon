@@ -17,7 +17,7 @@
         {#snippet child({ props })}
             <Card.Root 
                 {...props} 
-                class="min-w-[200px] max-w-[240px] m-3 h-80 flex flex-col text-left hover:bg-slate-50 transition-colors cursor-pointer"
+                class="min-w-[200px] max-w-[240px] m-3 h-80 flex flex-col text-left hover:bg-slate-900 transition-colors cursor-pointer"
             >
                 <Card.Header>
                     <Card.Title class="text-lg">{title}</Card.Title>
@@ -42,7 +42,7 @@
         {/snippet}
     </Dialog.Trigger>
 
-    <Dialog.Content class="sm:max-w-[600px]">
+    <Dialog.Content class="sm:max-w-[90vw] sm:max-h-[90vh] overflow-y-auto">
         <Dialog.Header>
             <Dialog.Title class="text-2xl">{title}</Dialog.Title>
         </Dialog.Header>
@@ -56,14 +56,14 @@
             </div>
             
             <div class="space-y-2">
-                 <h4 class="font-medium leading-none">Status</h4>
-                 <Badge variant="outline">Open</Badge>
+                 <h4 class="font-medium leading-none">Tags</h4>
+                 <Badge variant="outline">Sport</Badge>
             </div>
         </div>
 
         <Dialog.Footer>
-            <Button class="bg-green-600 hover:bg-green-700 text-white">
-                Confirm Join
+            <Button class="absolute right-5 bottom-5 bg-green-600 hover:bg-green-700 text-white">
+                Join
             </Button>
         </Dialog.Footer>
     </Dialog.Content>
