@@ -38,10 +38,10 @@ class Event extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public static function fetchByTags(Collection $tags): Collection
+    public static function fetchByTags(Collection $tags): \Illuminate\Database\Eloquent\Builder
     {
         return self::whereHas('tags', function ($query) use ($tags) {
             $query->whereIn('tags.id', $tags->pluck('id'));
-        })->get();
+        });
     }
 }

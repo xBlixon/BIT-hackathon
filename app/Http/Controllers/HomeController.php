@@ -13,20 +13,21 @@ class HomeController extends Controller
 {
     public function home(Request $request): Response
     {
-        $filteredTags = $request->query('tags', false);
-        $events = null;
-        if ($filteredTags) {
-            $filteredTags = Tag::fetchFromQueryString($filteredTags);
-            $events = Event::fetchByTags($filteredTags);
+        $filteredTagNames = array_filter((array) $request->query('tags', []));
+
+        if (!empty($filteredTagNames)) {
+            $tags = Tag::whereIn('name', $filteredTagNames)->get();
+            $eventsQuery = Event::fetchByTags($tags);
         } else {
-            $events = Event::all();
+            $eventsQuery = Event::query();
         }
-        //dd($events);
-        return Inertia::render('Home',
-            [
-                'isLoggedIn' => Auth::check(),
-                'allTags' => Tag::all(),
-                'filteredTags' => $filteredTags,
-            ]);
+
+        $events = $eventsQuery->with('tags')->withCount('attendees')->latest()->paginate(15);
+        return Inertia::render('Home', [
+            'events' => $events->all(),
+            'isLoggedIn' => Auth::check(),
+            'allTags' => Tag::all(),
+            'filteredTags' => $filteredTagNames,
+        ]);
     }
 }
