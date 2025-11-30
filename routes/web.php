@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventJoiningController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,10 +28,14 @@ Route::middleware('auth')->group(function () {
     // save event
     Route::post('/events', [EventController::class, 'store'])
         ->name('events.store');
+
+    Route::get('/join/{event}', [EventJoiningController::class, 'join'])
+        ->name('events.join');
 });
 
 Route::get('home', [HomeController::class, 'home'])
     ->name('home');
+
 
 /* WHEN THE DATA BASE EXISTS:
 //for all guests
