@@ -11,6 +11,14 @@ use Inertia\Response;
 
 class HomeController extends Controller
 {
+    /**
+     * Query String:
+     * page - number of the page of events
+     * tags[#] - tag to be filtered by
+     * search - title text to filter by
+     * @param Request $request
+     * @return Response
+     */
     public function home(Request $request): Response
     {
         $filteredTagNames = array_filter((array) $request->query('tags', []));
@@ -22,9 +30,19 @@ class HomeController extends Controller
             $eventsQuery = Event::query();
         }
 
-        $events = $eventsQuery->with('tags')->withCount('attendees')->latest()->paginate(15);
+        $textSearch = '%'.$request->query('search').'%' ?? '%';
+
+        $events = $eventsQuery
+            ->with('tags')
+            ->withCount('attendees')
+            ->latest()
+            ->whereLike('title', $textSearch)
+            ->paginate(15)
+            ->all();
+        dd($events);
+
         return Inertia::render('Home', [
-            'events' => $events->all(),
+            'events' => $events,
             'isLoggedIn' => Auth::check(),
             'allTags' => Tag::all(),
             'filteredTags' => $filteredTagNames,
