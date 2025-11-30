@@ -7,14 +7,16 @@
     let {
         title = "Default Title",
         description = "Default description...",
-        people = "0/10",
         tags = [],
         attendees = [],
         user = {},
         id
     } = $props();
 
-   let isAttending = attendees.some(attendee => attendee.id === user.id);
+    console.dir(user);
+    let numberOfPeople = attendees.length;
+    let isAttending = attendees.some(attendee => attendee.id === user.id);
+    // let isAttending = false;
 </script>
 
 <Dialog.Root>
@@ -34,19 +36,19 @@
 
                 <Card.Footer class="flex justify-between items-center">
 
-                    {#if {isAttending}}
+                    {#if isAttending}
                     <Button class="bg-gray-600 text-white h-8">Joined</Button>
                     {:else}
                     <Button
                         class="bg-green-600 hover:bg-green-700 text-white h-8"
-                        onclick={(e) => { e.stopPropagation();  }}
+                        onclick={(e) => { e.stopPropagation();  isAttending = !isAttending; }}
                         href="/join/{id}"
                     >
                         Join
                     </Button>
                     {/if}
 
-                    <p class="text-sm text-gray-500">{people}</p>
+                    <p class="text-sm text-gray-500">Attending: {numberOfPeople}</p>
                 </Card.Footer>
             </Card.Root>
         {/snippet}
